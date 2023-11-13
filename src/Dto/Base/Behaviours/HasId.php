@@ -5,7 +5,7 @@ namespace Invoicetic\Common\Dto\Base\Behaviours;
 
 trait HasId
 {
-    protected $id = null;
+    protected ?string $id = null;
 
     /**
      * Get identifier
@@ -27,5 +27,4 @@ trait HasId
         $this->id = $id;
         return $this;
     }
-
 }
