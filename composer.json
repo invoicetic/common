@@ -1,0 +1,42 @@
+{
+  "name": "invoicetic/common",
+  "type": "library",
+  "license": "MIT",
+  "description": "invoice multigateway base objects",
+  "keywords": [],
+  "homepage": "https://github.com/invoicetic/common",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Invoicetic\\Common\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Invoicetic\\Common\\Tests\\": "tests/src",
+      "Invoicetic\\Common\\Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "bytic/phpqatools": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "bytic/phpqatools": true
+    }
+  }
+}
