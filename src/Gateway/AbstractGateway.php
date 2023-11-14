@@ -2,13 +2,14 @@
 
 namespace Invoicetic\Common\Gateway;
 
+use Http\Discovery\Psr18ClientDiscovery;
 use Invoicetic\Common\Utility\Helper;
 use Psr\Http\Client\ClientInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class AbstractGateway
 {
-    use Behaviours\HasParametersTrait;
+    use \Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 
     /**
      * @var ClientInterface
@@ -24,8 +25,8 @@ class AbstractGateway
     /**
      * Create a new gateway instance
      *
-     * @param ClientInterface          $httpClient  A HTTP client to make API calls with
-     * @param HttpRequest     $httpRequest A Symfony HTTP request object
+     * @param ClientInterface $httpClient A HTTP client to make API calls with
+     * @param HttpRequest $httpRequest A Symfony HTTP request object
      */
     public function __construct(ClientInterface $httpClient = null, HttpRequest $httpRequest = null)
     {
@@ -47,7 +48,7 @@ class AbstractGateway
     /**
      * Initialize this gateway with default parameters
      *
-     * @param  array $parameters
+     * @param array $parameters
      * @return $this
      */
     public function initialize(array $parameters = array())
@@ -65,7 +66,7 @@ class AbstractGateway
      */
     protected function getDefaultHttpClient()
     {
-        return new Client();
+        return Psr18ClientDiscovery::find();
     }
 
     /**
@@ -76,5 +77,12 @@ class AbstractGateway
     protected function getDefaultHttpRequest()
     {
         return HttpRequest::createFromGlobals();
+    }
+
+    protected function createRequest($class, array $parameters)
+    {
+        $obj = new $class($this->httpClient, $this->httpRequest);
+
+        return $obj->initialize(array_replace($this->getParameters(), $parameters));
     }
 }

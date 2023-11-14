@@ -1,6 +1,6 @@
 <?php
 
-namespace Invoicetic\Common\Gateway\Behaviours;
+namespace Invoicetic\Common\Base\Behaviours;
 
 use Invoicetic\Common\Utility\Helper;
 use Symfony\Component\HttpFoundation\ParameterBag;

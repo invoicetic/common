@@ -2,6 +2,8 @@
 
 namespace Invoicetic\Common\Gateway;
 
+use Invoicetic\Common\Dto\Invoice\Invoice;
+
 interface GatewayInterface
 {
     /**
@@ -44,4 +46,6 @@ interface GatewayInterface
      * @return array
      */
     public function getParameters();
+
+    public function createInvoice(array|Invoice $parameters = []);
 }
