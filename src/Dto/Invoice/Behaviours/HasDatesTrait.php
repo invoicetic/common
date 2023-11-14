@@ -1,19 +1,16 @@
 <?php
 
-
 namespace Invoicetic\Common\Dto\Invoice\Behaviours;
-
 
 use DateTime;
 
-trait HasDates
+trait HasDatesTrait
 {
 
     /**
      * @var DateTime|null
      */
     private ?DateTime $issueDate = null;
-
 
     /**
      * @var DateTime|null

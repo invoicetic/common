@@ -6,15 +6,14 @@ use Invoicetic\Common\Dto\Invoice\Invoice;
 
 trait CreateInvoiceRequestTrait
 {
-    protected Invoice $invoice;
 
     public function getInvoice(): Invoice
     {
-        return $this->invoice;
+        return $this->getParameter('invoice');
     }
 
     public function setInvoice(Invoice $invoice): void
     {
-        $this->invoice = $invoice;
+        $this->setParameter('invoice', $invoice);
     }
 }
