@@ -7,6 +7,7 @@ class Identifier
     protected $value;
     protected $scheme;
 
+
     /**
      * Class constructor
      * @param string $value Value
