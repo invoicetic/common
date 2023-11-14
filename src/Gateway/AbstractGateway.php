@@ -3,11 +3,12 @@
 namespace Invoicetic\Common\Gateway;
 
 use Http\Discovery\Psr18ClientDiscovery;
+use Invoicetic\Common\Dto\Invoice\Invoice;
 use Invoicetic\Common\Utility\Helper;
 use Psr\Http\Client\ClientInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
-class AbstractGateway
+abstract class AbstractGateway implements GatewayInterface
 {
     use \Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 
@@ -79,10 +80,37 @@ class AbstractGateway
         return HttpRequest::createFromGlobals();
     }
 
-    protected function createRequest($class, array $parameters)
+    protected function createRequest($class, mixed $parameters)
     {
         $obj = new $class($this->httpClient, $this->httpRequest);
 
         return $obj->initialize(array_replace($this->getParameters(), $parameters));
+    }
+
+    public function createInvoice(Invoice $invoice, array $parameters = [])
+    {
+        $parameters['invoice'] = $invoice;
+
+        return $this->createRequest(
+            $this->createRequestClass(GatewayInterface::OPERATION_CREATE_INVOICE),
+            $parameters
+        );
+    }
+
+    protected function createRequestClass(string $operation): string
+    {
+        $operation = ucfirst($operation);
+        $class = $this->operationNamespace() . '\\Operations\\' . $operation . 'Request';
+        if (!class_exists($class)) {
+            throw new \RuntimeException("Class '$class' not found");
+        }
+
+        return $class;
+    }
+
+    protected function operationNamespace(): string
+    {
+        $reflection_class = new \ReflectionClass(get_class($this));
+        return $reflection_class->getNamespaceName();
     }
 }

@@ -6,6 +6,8 @@ use Invoicetic\Common\Dto\Invoice\Invoice;
 
 interface GatewayInterface
 {
+    public const OPERATION_CREATE_INVOICE = 'createInvoice';
+
     /**
      * Get gateway display name
      *
@@ -47,5 +49,5 @@ interface GatewayInterface
      */
     public function getParameters();
 
-    public function createInvoice(array|Invoice $parameters = []);
+    public function  createInvoice(Invoice $invoice, array $parameters = []);
 }

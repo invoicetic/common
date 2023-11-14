@@ -85,7 +85,7 @@ class Helper
     public static function getGatewayClassName($shortName)
     {
         // If the class starts with \ or Omnipay\, assume it's a FQCN
-        if (0 === strpos($shortName, '\\') || 0 === strpos($shortName, 'Omnipay\\')) {
+        if (0 === strpos($shortName, '\\') || 0 === strpos($shortName, 'Invoicetic\\')) {
             return $shortName;
         }
 
@@ -95,9 +95,17 @@ class Helper
         }
 
         // replace underscores with namespace marker, PSR-0 style
-        $shortName = str_replace('_', '\\', $shortName);
+        $shortName = explode('_', $shortName);
+        $shortName = array_map('ucfirst', $shortName);
+        $lastWord = end($shortName);
+        $shortName = implode('\\', $shortName);
         if (false === strpos($shortName, '\\')) {
             $shortName .= '\\';
+        }
+        $class = '\\Invoicetic\\'.$shortName.$lastWord.'Gateway';
+        // Check if the class exists and implements the Gateway Interface, if so -> FCQN
+        if (is_subclass_of($class, GatewayInterface::class, true)) {
+            return $class;
         }
 
         return '\\Invoicetic\\'.$shortName.'Gateway';
