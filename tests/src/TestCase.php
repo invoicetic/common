@@ -9,8 +9,6 @@ use Mockery as m;
  */
 abstract class TestCase extends \Bytic\Phpqa\PHPUnit\TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
-
     protected static function mock($class)
     {
         return m::mock($class);

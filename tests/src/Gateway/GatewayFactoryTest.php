@@ -10,7 +10,7 @@ class GatewayFactoryTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
-        self::mock('alias:Omnipay\\SpareChange\\TestGateway');
+        self::mock('alias:Invoicetic\\SpareChange\\TestGateway');
     }
 
     public function setUp(): void
@@ -20,7 +20,7 @@ class GatewayFactoryTest extends TestCase
 
     public function testReplace()
     {
-        $gateways = array('Foo');
+        $gateways = ['Foo'];
         $this->factory->replace($gateways);
 
         $this->assertSame($gateways, $this->factory->all());
@@ -45,19 +45,19 @@ class GatewayFactoryTest extends TestCase
     public function testCreateShortName()
     {
         $gateway = $this->factory->create('SpareChange_Test');
-        $this->assertInstanceOf('\\Omnipay\\SpareChange\\TestGateway', $gateway);
+        $this->assertInstanceOf('\\Invoicetic\\SpareChange\\TestGateway', $gateway);
     }
 
     public function testCreateFullyQualified()
     {
-        $gateway = $this->factory->create('\\Omnipay\\SpareChange\\TestGateway');
-        $this->assertInstanceOf('\\Omnipay\\SpareChange\\TestGateway', $gateway);
+        $gateway = $this->factory->create('\\Invoicetic\\SpareChange\\TestGateway');
+        $this->assertInstanceOf('\\Invoicetic\\SpareChange\\TestGateway', $gateway);
     }
 
     public function testCreateInvalid()
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage("Class '\Omnipay\Invalid\Gateway' not found");
+        $this->expectExceptionMessage("Class '\Invoicetic\Invalid\Gateway' not found");
 
         $gateway = $this->factory->create('Invalid');
     }

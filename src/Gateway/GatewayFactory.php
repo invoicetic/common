@@ -16,7 +16,7 @@ class GatewayFactory
      *
      * @var array
      */
-    private $gateways = array();
+    private $gateways = [];
 
     /**
      * All available gateways
@@ -33,7 +33,7 @@ class GatewayFactory
      *
      * @param array $gateways An array of gateway names
      */
-    public function replace(array $gateways)
+    public function replace($gateways)
     {
         $this->gateways = $gateways;
     }

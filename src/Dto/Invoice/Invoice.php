@@ -7,54 +7,14 @@ use Invoicetic\Common\Dto\Party\Party;
 
 class Invoice
 {
+    use Behaviours\HasDates;
     use Behaviours\InvoiceValidationTrait;
-
-    /**
-     * @var \DateTime
-     */
-    private $issueDate;
-
     private $invoiceTypeCode = InvoiceTypeCode::INVOICE;
 
-    private $dueDate;
+    private ?Party $accountingSupplierParty;
+    private ?Party $accountingCustomerParty;
 
 
-    private $accountingSupplierParty;
-    private $accountingCustomerParty;
-
-    /**
-     * @return \DateTime
-     */
-    public function getIssueDate() {
-        return $this->issueDate;
-    }
-
-    /**
-     * @param \DateTime $issueDate
-     * @return Invoice
-     */
-    public function setIssueDate($issueDate) {
-        $this->issueDate = $issueDate;
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getDueDate(): ?DateTime
-    {
-        return $this->dueDate;
-    }
-
-    /**
-     * @param DateTime $dueDate
-     * @return Invoice
-     */
-    public function setDueDate(DateTime $dueDate): Invoice
-    {
-        $this->dueDate = $dueDate;
-        return $this;
-    }
 
 
     /**
