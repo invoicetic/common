@@ -4,6 +4,7 @@ namespace Invoicetic\Common\Gateway\Operations\Behaviours;
 
 trait HasHttpEndpointRequestTrait
 {
+    protected $endpoint = null;
 
     /**
      * {@inheritdoc}
@@ -42,6 +43,22 @@ trait HasHttpEndpointRequestTrait
     public function getHeaders(): array
     {
         return [];
+    }
+
+    /**
+     * @return null
+     */
+    public function getEndpoint()
+    {
+        return $this->endpoint;
+    }
+
+    /**
+     * @param null $endpoint
+     */
+    public function setEndpoint($endpoint): void
+    {
+        $this->endpoint = $endpoint;
     }
 
     abstract public function getEndpointUrl();

@@ -77,7 +77,7 @@ trait HasParametersTrait
     /**
      * @return array
      */
-    public function getDefaultParameters()
+    public function getDefaultParameters(): array
     {
         return array();
     }
