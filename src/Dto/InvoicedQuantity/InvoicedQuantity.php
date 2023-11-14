@@ -2,15 +2,17 @@
 
 namespace Invoicetic\Common\Dto\InvoicedQuantity;
 
+use Invoicetic\Common\Dto\Base\UnitCode;
+
 class InvoicedQuantity
 {
     protected string $unitCode;
     protected float $quantity;
 
-    public function __construct(float $quantity = null, string $unitCode = null)
+    public function __construct(float|int $quantity = null, ?string $unitCode = null)
     {
-        $this->unitCode = $unitCode;
-        $this->quantity = $quantity;
+        $this->unitCode = $unitCode = $unitCode ?? UnitCode::UNIT;
+        $this->quantity = floatval($quantity);
     }
 
     public function getUnitCode(): string

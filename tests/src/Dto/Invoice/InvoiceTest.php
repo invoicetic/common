@@ -22,6 +22,7 @@ class InvoiceTest extends TestCase
                         'name' => 'Test name',
                         'description' => 'Test description',
                     ],
+                    'invoicedQuantity' => 1,
                 ],
             ],
         ];
