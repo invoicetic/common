@@ -4,11 +4,14 @@ namespace Invoicetic\Common\Dto\Invoice;
 
 use DateTime;
 use Invoicetic\Common\Dto\Party\Party;
+use Invoicetic\Common\Serializer\Serializable;
 
 class Invoice
 {
     use Behaviours\HasDates;
     use Behaviours\InvoiceValidationTrait;
+    use Serializable;
+
     private $invoiceTypeCode = InvoiceTypeCode::INVOICE;
 
     private ?Party $accountingSupplierParty;
