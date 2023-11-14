@@ -14,11 +14,11 @@ abstract class AbstractRequest
     }
 
     /**
-     * An associated ResponseInterface.
+     * An associated AbstractResponse.
      *
-     * @var ResponseInterface
+     * @var AbstractResponse
      */
-    protected $response;
+    protected ?AbstractResponse $response = null;
 
     /**
      * Create a new Request
@@ -75,7 +75,7 @@ abstract class AbstractRequest
     /**
      * Send the request
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function send()
     {
@@ -87,7 +87,7 @@ abstract class AbstractRequest
     /**
      * Get the associated Response.
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function getResponse()
     {
@@ -97,4 +97,20 @@ abstract class AbstractRequest
 
         return $this->response;
     }
+
+    protected function createResponse($data)
+    {
+        $response = $this->createResponseClass();
+        return $this->response = new $response($this, $data);
+    }
+
+    protected function createResponseClass(): string
+    {
+        return Response::class;
+    }
+
+    abstract public function getData();
+
+
+    abstract public function sendData($data);
 }
