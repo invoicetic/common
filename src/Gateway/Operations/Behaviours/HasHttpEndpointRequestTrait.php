@@ -1,6 +1,6 @@
 <?php
 
-namespace Invoicetic\Common\Gateway\Operations\Behaviors;
+namespace Invoicetic\Common\Gateway\Operations\Behaviours;
 
 trait HasHttpEndpointRequestTrait
 {
