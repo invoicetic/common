@@ -5,6 +5,7 @@ namespace Invoicetic\Common\Tests\Gateway;
 
 use Invoicetic\Common\Gateway\GatewayFactory;
 use Invoicetic\Common\Tests\TestCase;
+use RuntimeException;
 
 class GatewayFactoryTest extends TestCase
 {
@@ -56,7 +57,7 @@ class GatewayFactoryTest extends TestCase
 
     public function testCreateInvalid()
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Class '\Invoicetic\Invalid\Gateway' not found");
 
         $gateway = $this->factory->create('Invalid');

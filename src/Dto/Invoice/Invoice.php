@@ -2,11 +2,13 @@
 
 namespace Invoicetic\Common\Dto\Invoice;
 
+use Invoicetic\Common\Dto\InvoiceLine\HasInvoiceLinesTrait;
 use Invoicetic\Common\Serializer\Serializable;
 
 class Invoice
 {
     use Behaviours\HasDatesTrait;
+    use HasInvoiceLinesTrait;
     use Behaviours\HasPartiesTrait;
     use Behaviours\InvoiceValidationTrait;
     use Serializable;

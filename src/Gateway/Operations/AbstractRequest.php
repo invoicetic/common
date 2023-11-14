@@ -2,13 +2,14 @@
 
 namespace Invoicetic\Common\Gateway\Operations;
 
+use Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 use Psr\Http\Client\ClientInterface;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 abstract class AbstractRequest
 {
-    use \Invoicetic\Common\Base\Behaviours\HasParametersTrait
+    use HasParametersTrait
     {
         setParameter as traitSetParameter;
     }

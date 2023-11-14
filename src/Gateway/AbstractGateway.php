@@ -3,14 +3,17 @@
 namespace Invoicetic\Common\Gateway;
 
 use Http\Discovery\Psr18ClientDiscovery;
+use Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 use Invoicetic\Common\Dto\Invoice\Invoice;
 use Invoicetic\Common\Utility\Helper;
 use Psr\Http\Client\ClientInterface;
+use ReflectionClass;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 abstract class AbstractGateway implements GatewayInterface
 {
-    use \Invoicetic\Common\Base\Behaviours\HasParametersTrait;
+    use HasParametersTrait;
 
     /**
      * @var ClientInterface
@@ -18,7 +21,7 @@ abstract class AbstractGateway implements GatewayInterface
     protected $httpClient;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var HttpRequest
      */
     protected $httpRequest;
 
@@ -102,7 +105,7 @@ abstract class AbstractGateway implements GatewayInterface
         $operation = ucfirst($operation);
         $class = $this->operationNamespace() . '\\Operations\\' . $operation . 'Request';
         if (!class_exists($class)) {
-            throw new \RuntimeException("Class '$class' not found");
+            throw new RuntimeException("Class '$class' not found");
         }
 
         return $class;
@@ -110,7 +113,7 @@ abstract class AbstractGateway implements GatewayInterface
 
     protected function operationNamespace(): string
     {
-        $reflection_class = new \ReflectionClass(get_class($this));
+        $reflection_class = new ReflectionClass(get_class($this));
         return $reflection_class->getNamespaceName();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Invoicetic\Common\Serializer;
 
+use InvalidArgumentException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
@@ -29,7 +30,7 @@ class SerializerFactory
     {
         return match ($type) {
             self::DEFAULT => self::createDefaultSerializer(),
-            default => throw new \InvalidArgumentException("Serializer $type not found"),
+            default => throw new InvalidArgumentException("Serializer $type not found"),
         };
 
     }

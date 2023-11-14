@@ -2,6 +2,8 @@
 
 namespace Invoicetic\Common\Exception;
 
-class InvalidRequestException extends \Exception implements InvoiceticException
+use Exception;
+
+class InvalidRequestException extends Exception implements InvoiceticException
 {
 }

@@ -2,6 +2,8 @@
 
 namespace Invoicetic\Common\Tests\Utility;
 
+use DateInterval;
+use DateTime;
 use Invoicetic\Common\Dto\Invoice\Invoice;
 use Invoicetic\Common\Utility\Serializer;
 use PHPUnit\Framework\TestCase;
@@ -10,10 +12,10 @@ class SerializerTest extends TestCase
 {
     public function test_serialize()
     {
-        $now = \DateTime::createFromFormat('Y-m-d', '2019-01-01');
+        $now = DateTime::createFromFormat('Y-m-d', '2019-01-01');
         $invoice = new Invoice();
         $invoice->setIssueDate($now);
-        $invoice->setDueDate((clone $now)->add(new \DateInterval('P1D')));
+        $invoice->setDueDate((clone $now)->add(new DateInterval('P1D')));
 
         $serialized = Serializer::serialize($invoice, 'json');
         $this->assertJson($serialized);
@@ -23,10 +25,10 @@ class SerializerTest extends TestCase
 
     public function test_deserialize()
     {
-        $now = \DateTime::createFromFormat('Y-m-d', '2019-01-01');
+        $now = DateTime::createFromFormat('Y-m-d', '2019-01-01');
         $invoice = new Invoice();
         $invoice->setIssueDate($now);
-        $invoice->setDueDate((clone $now)->add(new \DateInterval('P1D')));
+        $invoice->setDueDate((clone $now)->add(new DateInterval('P1D')));
 
         $serialized = Serializer::serialize($invoice, 'json');
 
