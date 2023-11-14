@@ -25,7 +25,6 @@ trait HasHttpEndpointRequestTrait
     }
 
 
-
     /**
      * Get HTTP Method.
      * This is nearly always POST but can be over-ridden in sub classes.
@@ -61,7 +60,15 @@ trait HasHttpEndpointRequestTrait
         $this->endpoint = $endpoint;
     }
 
-    abstract public function getEndpointUrl();
+    public function getEndpointUrl(): string
+    {
+        return $this->getEndpoint() . $this->getEndpointUrlPath();
+    }
+
+    protected function getEndpointUrlPath(): ?string
+    {
+        return defined(static::class . '::ENDPOINT') ? static::ENDPOINT : null;
+    }
 
 }
 

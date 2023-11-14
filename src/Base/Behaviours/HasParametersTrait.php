@@ -2,6 +2,7 @@
 
 namespace Invoicetic\Common\Base\Behaviours;
 
+use Invoicetic\Common\Exception\InvalidRequestException;
 use Invoicetic\Common\Utility\Helper;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -72,6 +73,25 @@ trait HasParametersTrait
 
         Helper::initialize($this, $parameters);
         return $this;
+    }
+
+    /**
+     * Validate the request.
+     *
+     * This method is called internally by gateways to avoid wasting time with an API call
+     * when the request is clearly invalid.
+     *
+     * @param string ... a variable length list of required parameters
+     * @throws InvalidRequestException
+     */
+    public function validateParameters(...$args): void
+    {
+        foreach ($args as $key) {
+            $value = $this->parameters->get($key);
+            if (!isset($value)) {
+                throw new InvalidRequestException("The $key parameter is required");
+            }
+        }
     }
 
     /**
