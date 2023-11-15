@@ -6,7 +6,10 @@ use Invoicetic\Common\Dto\InvoiceLine\InvoiceLine;
 
 trait HasInvoicedQuantity
 {
-    protected $invoicedQuantity;
+    /**
+     * @var InvoicedQuantity
+     */
+    protected InvoicedQuantity $invoicedQuantity;
 
     /**
      * @return InvoicedQuantity
@@ -20,12 +23,14 @@ trait HasInvoicedQuantity
     }
 
     /**
-     * @param float $invoicedQuantity
-     * @return self
+     * @param float|InvoicedQuantity|null $invoicedQuantity
+     * @return HasInvoicedQuantity|InvoiceLine
      */
     public function setInvoicedQuantity(float|InvoicedQuantity|null $invoicedQuantity): self
     {
-        $invoicedQuantity = $invoicedQuantity instanceof InvoicedQuantity ? $invoicedQuantity : new InvoicedQuantity($invoicedQuantity);
+        $invoicedQuantity = $invoicedQuantity instanceof InvoicedQuantity
+            ? $invoicedQuantity
+            : new InvoicedQuantity($invoicedQuantity);
         $this->invoicedQuantity = $invoicedQuantity;
         return $this;
     }

@@ -9,10 +9,10 @@ class InvoicedQuantity
     protected string $unitCode;
     protected float $quantity;
 
-    public function __construct(float|int $quantity = null, ?string $unitCode = null)
+    public function __construct(float|int|null $quantity = null, ?string $unitCode = null)
     {
-        $this->unitCode = $unitCode = $unitCode ?? UnitCode::UNIT;
-        $this->quantity = floatval($quantity);
+        $this->setQuantity($quantity);
+        $this->unitCode = $unitCode ?? UnitCode::UNIT;
     }
 
     public function getUnitCode(): string
@@ -30,8 +30,9 @@ class InvoicedQuantity
         return $this->quantity;
     }
 
-    public function setQuantity(string $quantity): void
+    public function setQuantity(float|int|null $quantity): void
     {
+        $quantity = (float) $quantity;
         $this->quantity = $quantity;
     }
 }

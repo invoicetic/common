@@ -22,7 +22,7 @@ class InvoiceTest extends TestCase
                         'name' => 'Test name',
                         'description' => 'Test description',
                     ],
-                    'invoicedQuantity' => 1,
+                    'invoicedQuantity' => ['quantity' => 1],
                 ],
             ],
         ];
@@ -35,6 +35,7 @@ class InvoiceTest extends TestCase
         $this->assertInstanceOf(Item::class, $item);
         $this->assertEquals('Test name', $item->getName());
         $this->assertEquals('Test description', $item->getDescription());
+        $this->assertEquals(1, $line->getInvoicedQuantity()->getQuantity());
     }
 
 }

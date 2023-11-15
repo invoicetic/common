@@ -29,6 +29,7 @@ class InvoiceLineTest extends TestCase
                 'name' => 'Test name',
                 'description' => 'Test description',
             ],
+            'invoicedQuantity' => ['quantity' => 1.0],
         ];
         $line = InvoiceLine::denormalize($data);
 
@@ -36,6 +37,7 @@ class InvoiceLineTest extends TestCase
         $this->assertInstanceOf(Item::class, $item);
         $this->assertEquals('Test name', $item->getName());
         $this->assertEquals('Test description', $item->getDescription());
+        $this->assertEquals(1, $line->getInvoicedQuantity()->getQuantity());
     }
 
     protected function setUp(): void
