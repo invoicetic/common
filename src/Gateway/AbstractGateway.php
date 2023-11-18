@@ -2,9 +2,12 @@
 
 namespace Invoicetic\Common\Gateway;
 
-use Http\Discovery\Psr18ClientDiscovery;
 use Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 use Invoicetic\Common\Dto\Invoice\Invoice;
+use Invoicetic\Common\Gateway\Behaviours\HasHttpClientTrait;
+use Invoicetic\Common\Gateway\Behaviours\HasHttpEndpointTrait;
+use Invoicetic\Common\Gateway\Behaviours\HasHttpRequestTrait;
+use Invoicetic\Common\Gateway\Behaviours\HasSandboxTrait;
 use Invoicetic\Common\Utility\Helper;
 use Psr\Http\Client\ClientInterface;
 use ReflectionClass;
@@ -14,17 +17,10 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 abstract class AbstractGateway implements GatewayInterface
 {
     use HasParametersTrait;
-
-    /**
-     * @var ClientInterface
-     */
-    protected $httpClient;
-
-    /**
-     * @var HttpRequest
-     */
-    protected $httpRequest;
-
+    use HasHttpClientTrait;
+    use HasHttpRequestTrait;
+    use HasHttpEndpointTrait;
+    use HasSandboxTrait;
 
     /**
      * Create a new gateway instance
@@ -34,8 +30,8 @@ abstract class AbstractGateway implements GatewayInterface
      */
     public function __construct(ClientInterface $httpClient = null, HttpRequest $httpRequest = null)
     {
-        $this->httpClient = $httpClient ?: $this->getDefaultHttpClient();
-        $this->httpRequest = $httpRequest ?: $this->getDefaultHttpRequest();
+        $this->initHttpClient($httpClient, true);
+        $this->initHttpRequest($httpRequest, true);
         $this->initialize();
     }
 
@@ -60,27 +56,6 @@ abstract class AbstractGateway implements GatewayInterface
         $this->initializeParams($parameters);
 
         return $this;
-    }
-
-
-    /**
-     * Get the global default HTTP client.
-     *
-     * @return ClientInterface
-     */
-    protected function getDefaultHttpClient()
-    {
-        return Psr18ClientDiscovery::find();
-    }
-
-    /**
-     * Get the global default HTTP request.
-     *
-     * @return HttpRequest
-     */
-    protected function getDefaultHttpRequest()
-    {
-        return HttpRequest::createFromGlobals();
     }
 
     protected function createRequest($class, mixed $parameters)

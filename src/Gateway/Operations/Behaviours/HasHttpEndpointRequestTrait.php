@@ -2,9 +2,15 @@
 
 namespace Invoicetic\Common\Gateway\Operations\Behaviours;
 
+use Invoicetic\Common\Gateway\Behaviours\HasHttpEndpointTrait;
+use Psr\Http\Client\ClientInterface;
+
+/**
+ * @property ClientInterface $httpClient
+ */
 trait HasHttpEndpointRequestTrait
 {
-    protected $endpoint = null;
+    use HasHttpEndpointTrait;
 
     /**
      * {@inheritdoc}
@@ -14,11 +20,14 @@ trait HasHttpEndpointRequestTrait
         $headers = $this->getHeaders();
         $body = $data ? http_build_query($data, '', '&') : null;
 
-        $httpResponse = $this->httpClient->request(
+        $httpRequest = $this->createRequest(
             $this->getHttpMethod(),
             $this->getEndpointUrl(),
             $headers,
             $body
+        );
+        $httpResponse = $this->httpClient->sendRequest(
+            $httpRequest
         );
 
         return $this->createResponse($httpResponse->getBody()->getContents());
@@ -42,22 +51,6 @@ trait HasHttpEndpointRequestTrait
     public function getHeaders(): array
     {
         return [];
-    }
-
-    /**
-     * @return null
-     */
-    public function getEndpoint()
-    {
-        return $this->endpoint;
-    }
-
-    /**
-     * @param null $endpoint
-     */
-    public function setEndpoint($endpoint): void
-    {
-        $this->endpoint = $endpoint;
     }
 
     public function getEndpointUrl(): string

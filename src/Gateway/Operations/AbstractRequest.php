@@ -3,6 +3,8 @@
 namespace Invoicetic\Common\Gateway\Operations;
 
 use Invoicetic\Common\Base\Behaviours\HasParametersTrait;
+use Invoicetic\Common\Gateway\Behaviours\HasHttpClientTrait;
+use Invoicetic\Common\Gateway\Behaviours\HasHttpRequestTrait;
 use Psr\Http\Client\ClientInterface;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -13,11 +15,13 @@ abstract class AbstractRequest
     {
         setParameter as traitSetParameter;
     }
+    use HasHttpClientTrait;
+    use HasHttpRequestTrait;
 
     /**
      * An associated AbstractResponse.
      *
-     * @var AbstractResponse
+     * @var AbstractResponse|null
      */
     protected ?AbstractResponse $response = null;
 
@@ -29,8 +33,8 @@ abstract class AbstractRequest
      */
     public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
     {
-        $this->httpClient = $httpClient;
-        $this->httpRequest = $httpRequest;
+        $this->initHttpClient($httpClient);
+        $this->initHttpRequest($httpRequest);
         $this->initialize();
     }
 
