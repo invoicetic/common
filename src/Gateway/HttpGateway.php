@@ -10,16 +10,24 @@ abstract class HttpGateway extends AbstractGateway
 
     protected function generateEndpoint()
     {
+        var_dump($this->isSandbox());
         return $this->isSandbox() ? $this->getSandboxEndpoint() : $this->getProductionEndpoint();
     }
 
     protected function getSandboxEndpoint()
     {
-        return defined(self::class.'::ENDPOINT_SANDBOX') ? self::ENDPOINT_SANDBOX : null;
+        return defined(static::class . '::ENDPOINT_SANDBOX') ? static::ENDPOINT_SANDBOX : null;
     }
 
     protected function getProductionEndpoint()
     {
-        return defined(self::class.'::ENDPOINT_PRODUCTION') ? self::ENDPOINT_PRODUCTION : null;
+        return defined(static::class . '::ENDPOINT_PRODUCTION') ? static::ENDPOINT_PRODUCTION : null;
+    }
+
+    public function getDefaultParameters(): array
+    {
+        $params = parent::getDefaultParameters();
+        $params['endpoint'] = $this->getEndpoint();
+        return $params;
     }
 }

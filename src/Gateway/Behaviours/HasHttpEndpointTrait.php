@@ -12,7 +12,7 @@ trait HasHttpEndpointTrait
     public function getEndpoint()
     {
         if ($this->endpoint == null) {
-            $this->endpoint = $this->generateEndpoint();
+            return $this->generateEndpoint();
         }
         return $this->endpoint;
     }
@@ -24,8 +24,5 @@ trait HasHttpEndpointTrait
     {
         $this->endpoint = $endpoint;
     }
-
-    abstract protected function generateEndpoint();
-
 }
 

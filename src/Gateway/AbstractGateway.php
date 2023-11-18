@@ -19,8 +19,6 @@ abstract class AbstractGateway implements GatewayInterface
     use HasParametersTrait;
     use HasHttpClientTrait;
     use HasHttpRequestTrait;
-    use HasHttpEndpointTrait;
-    use HasSandboxTrait;
 
     /**
      * Create a new gateway instance
