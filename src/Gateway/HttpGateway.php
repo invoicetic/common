@@ -5,12 +5,13 @@ namespace Invoicetic\Common\Gateway;
 
 abstract class HttpGateway extends AbstractGateway
 {
-    use Behaviours\HasSandboxTrait;
+    use Behaviours\HasSandboxTrait {
+        setSandbox as setSandboxTrait;
+    }
     use Behaviours\HasHttpEndpointTrait;
 
     protected function generateEndpoint()
     {
-        var_dump($this->isSandbox());
         return $this->isSandbox() ? $this->getSandboxEndpoint() : $this->getProductionEndpoint();
     }
 
@@ -22,6 +23,12 @@ abstract class HttpGateway extends AbstractGateway
     protected function getProductionEndpoint()
     {
         return defined(static::class . '::ENDPOINT_PRODUCTION') ? static::ENDPOINT_PRODUCTION : null;
+    }
+
+    public function setSandbox(bool $sandbox): void
+    {
+        $this->setSandboxTrait($sandbox);
+        $this->setEndpoint($this->generateEndpoint());
     }
 
     public function getDefaultParameters(): array

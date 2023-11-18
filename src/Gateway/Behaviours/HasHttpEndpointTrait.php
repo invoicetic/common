@@ -23,6 +23,7 @@ trait HasHttpEndpointTrait
     public function setEndpoint($endpoint): void
     {
         $this->endpoint = $endpoint;
+        $this->setParameter('endpoint', $endpoint);
     }
 }
 

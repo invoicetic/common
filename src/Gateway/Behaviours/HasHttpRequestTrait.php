@@ -2,7 +2,6 @@
 
 namespace Invoicetic\Common\Gateway\Behaviours;
 
-use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
@@ -52,8 +51,11 @@ trait HasHttpRequestTrait
         return $this->requestFactory;
     }
 
-    protected function createRequest($method, $url, $headers, $body): \Psr\Http\Message\RequestInterface
+    protected function createRequest($method, $url, $headers = [], $post = [], $cookie = []): \Psr\Http\Message\RequestInterface
     {
-        return $this->getRequestFactory()->createRequest($method, $url, $headers, $body);
+        $request = $this->getRequestFactory()->createServerRequest($method, $url, $headers);
+        return $request
+            ->withParsedBody($post ?? [])
+            ->withCookieParams($cookie ?? []);
     }
 }
