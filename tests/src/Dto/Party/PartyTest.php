@@ -3,6 +3,7 @@
 namespace Invoicetic\Common\Tests\Dto\Party;
 
 use Invoicetic\Common\Dto\Identifier\Identifier;
+use Invoicetic\Common\Dto\LegalEntity\LegalEntity;
 use Invoicetic\Common\Dto\Party\Party;
 use PHPUnit\Framework\TestCase;
 

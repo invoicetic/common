@@ -3,6 +3,7 @@
 namespace Invoicetic\Common\Dto\Party;
 
 use Invoicetic\Common\Dto\Base\Behaviours\HasName;
+use Invoicetic\Common\Dto\Identifier\Identifier;
 use Invoicetic\Common\Dto\LegalEntity\HasLegalEntityTrait;
 use Invoicetic\Common\Dto\PostalAddress\PostalAddress;
 use Invoicetic\Common\Serializer\Serializable;

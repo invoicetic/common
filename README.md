@@ -7,3 +7,6 @@
 * https://github.com/pondersource/peppol-php
 * https://github.com/sportakal/digitalplanet/tree/1f2fbc5cd935f2933127e3c876188f3871dced9c
 * https://github.com/Sylius/InvoicingPlugin/tree/main
+
+#### DOCUMENTATION
+* https://docs.peppol.eu/poacc/billing/3.0/

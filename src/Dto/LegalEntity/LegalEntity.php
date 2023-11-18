@@ -2,17 +2,22 @@
 
 namespace Invoicetic\Common\Dto\LegalEntity;
 
+use Invoicetic\Common\Serializer\Serializable;
+
 class LegalEntity
 {
-    private $registrationName;
-    private $companyId;
-    private $companyIdAttributes;
-    private $companyLegalForm;
+
+    use Serializable;
+    
+    protected $registrationName;
+    protected $companyId;
+    protected $companyIdAttributes;
+    protected $companyLegalForm;
 
     /**
      * Seller name
      */
-    public function getRegistrationNumber(): ?string
+    public function getRegistrationName(): ?string
     {
         return $this->registrationName;
     }
@@ -20,7 +25,7 @@ class LegalEntity
     /**
      * Set seller name;
      */
-    public function setRegistrationNumber(?string $registrationName): LegalEntity
+    public function setRegistrationName(?string $registrationName): LegalEntity
     {
         $this->registrationName = $registrationName;
         return $this;

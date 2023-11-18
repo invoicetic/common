@@ -8,23 +8,34 @@ trait HasLegalEntityTrait
 {
 
     /**
-     * @var LegalEntity
+     * @var LegalEntity|null
      */
-    private $legalEntity;
+    private ?LegalEntity $legalEntity = null;
 
     /**
      * @return LegalEntity
      */
-    public function getLegalEntity() {
+    public function getLegalEntity(): LegalEntity
+    {
+        if (null === $this->legalEntity) {
+            $this->legalEntity = new LegalEntity();
+        }
         return $this->legalEntity;
     }
 
+    public function hasLegalEntity(): bool
+    {
+        return $this->legalEntity !== null;
+    }
+
     /**
-     * @param $legalEntity
-     * @return Party
+     * @param LegalEntity $legalEntity
+     * @return self
      */
-    public function setLegalEntity($legalEntity) {
+    public function setLegalEntity(LegalEntity $legalEntity): self
+    {
         $this->legalEntity = $legalEntity;
         return $this;
     }
+
 }
