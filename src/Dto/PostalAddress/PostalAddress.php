@@ -9,6 +9,8 @@ class PostalAddress
     protected $buildingNumber;
     protected $cityName;
     protected $postalZone;
+
+    protected $countrySubentity;
     protected $country;
 
 
@@ -91,6 +93,24 @@ class PostalAddress
     public function setPostalZone(?string $postalZone): PostalAddress
     {
         $this->postalZone = $postalZone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountrySubentity(): ?string
+    {
+        return $this->countrySubentity;
+    }
+
+    /**
+     * @param string $subentity
+     * @return self
+     */
+    public function setCountrySubentity(string $countrySubentity): self
+    {
+        $this->countrySubentity = $countrySubentity;
         return $this;
     }
 
