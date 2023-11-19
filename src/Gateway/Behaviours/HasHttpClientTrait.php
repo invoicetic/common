@@ -3,6 +3,7 @@
 namespace Invoicetic\Common\Gateway\Behaviours;
 
 use Http\Client\Common\Plugin\ContentLengthPlugin;
+use Http\Client\Common\Plugin\ContentTypePlugin;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Discovery\Psr18Client;
@@ -28,7 +29,7 @@ trait HasHttpClientTrait
 
     public function initHttpClient($client, $auto = true): void
     {
-        $client = $client ? $client: null;
+        $client = $client ?: null;
         if ($auto && !$client) {
             $client = $this->getDefaultHttpClient();
         }
@@ -45,6 +46,7 @@ trait HasHttpClientTrait
         $client = Psr18ClientDiscovery::find();
         $plugins[] = new ErrorPlugin();
         $plugins[] = new ContentLengthPlugin();
+        $plugins[] = new ContentTypePlugin();
         return new PluginClient($client, $plugins);
     }
 

@@ -51,11 +51,15 @@ trait HasHttpRequestTrait
         return $this->requestFactory;
     }
 
-    protected function createRequest($method, $url, $headers = [], $post = [], $cookie = []): \Psr\Http\Message\RequestInterface
+    protected function createRequest($method, $url, $headers = [], $body = [], $cookie = []): \Psr\Http\Message\RequestInterface
     {
         $request = $this->getRequestFactory()->createServerRequest($method, $url, $headers);
+
+        $stringBody = is_array($body) ? json_encode($body, JSON_THROW_ON_ERROR) : $body;
+        $body = Psr17FactoryDiscovery::findStreamFactory()->createStream($stringBody);
+
         return $request
-            ->withParsedBody($post ?? [])
+            ->withBody($body)
             ->withCookieParams($cookie ?? []);
     }
 }

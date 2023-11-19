@@ -18,13 +18,12 @@ trait HasHttpEndpointRequestTrait
     public function sendData($data)
     {
         $headers = $this->getHeaders();
-        $body = $data ? http_build_query($data, '', '&') : null;
 
         $httpRequest = $this->createRequest(
             $this->getHttpMethod(),
             $this->getEndpointUrl(),
             $headers,
-            $body
+            $data
         );
         $httpResponse = $this->httpClient->sendRequest(
             $httpRequest

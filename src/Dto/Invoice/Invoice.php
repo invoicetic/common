@@ -11,6 +11,7 @@ class Invoice
     use HasInvoiceLinesTrait;
     use Behaviours\HasPartiesTrait;
     use Behaviours\InvoiceValidationTrait;
+    use Behaviours\HasCurrencyTrait;
     use Serializable;
 
     private $invoiceTypeCode = InvoiceTypeCode::INVOICE;
