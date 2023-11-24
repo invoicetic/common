@@ -5,6 +5,7 @@ namespace Invoicetic\Common\Gateway\Operations;
 use Invoicetic\Common\Base\Behaviours\HasParametersTrait;
 use Invoicetic\Common\Gateway\Behaviours\HasHttpClientTrait;
 use Invoicetic\Common\Gateway\Behaviours\HasHttpRequestTrait;
+use Invoicetic\Common\Gateway\Operations\Behaviours\HasResponseRequestTrait;
 use Psr\Http\Client\ClientInterface;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -17,13 +18,7 @@ abstract class AbstractRequest
     }
     use HasHttpClientTrait;
     use HasHttpRequestTrait;
-
-    /**
-     * An associated AbstractResponse.
-     *
-     * @var AbstractResponse|null
-     */
-    protected ?AbstractResponse $response = null;
+    use HasResponseRequestTrait;
 
     /**
      * Create a new Request
@@ -87,31 +82,6 @@ abstract class AbstractRequest
         $data = $this->getData();
 
         return $this->sendData($data);
-    }
-
-    /**
-     * Get the associated Response.
-     *
-     * @return AbstractResponse
-     */
-    public function getResponse()
-    {
-        if (null === $this->response) {
-            throw new RuntimeException('You must call send() before accessing the Response!');
-        }
-
-        return $this->response;
-    }
-
-    protected function createResponse($data)
-    {
-        $response = $this->createResponseClass();
-        return $this->response = new $response($this, $data);
-    }
-
-    protected function createResponseClass(): string
-    {
-        return Response::class;
     }
 
     abstract public function getData();

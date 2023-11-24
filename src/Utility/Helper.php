@@ -110,5 +110,13 @@ class Helper
 
         return '\\Invoicetic\\'.$shortName.'Gateway';
     }
+
+    public static function generateResponseClassesForRequest($class)
+    {
+        $tries = [
+
+        ];
+        return $tries;
+    }
 }
 
