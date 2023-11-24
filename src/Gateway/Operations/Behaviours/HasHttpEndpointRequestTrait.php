@@ -29,9 +29,15 @@ trait HasHttpEndpointRequestTrait
             $httpRequest
         );
 
-        return $this->createResponse($httpResponse->getBody()->getContents());
+        return $this->createResponse(
+            $this->createResponseDataFromHttpResponse($httpResponse)
+        );
     }
 
+    protected function createResponseDataFromHttpResponse($httpResponse)
+    {
+        return $httpResponse->getBody()->getContents();
+    }
 
     /**
      * Get HTTP Method.

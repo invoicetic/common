@@ -2,18 +2,21 @@
 
 namespace Invoicetic\Common\Gateway\Operations;
 
-use Invoicetic\Common\Dto\Invoice\Invoice;
+use Invoicetic\Common\Gateway\Operations\Behaviours\HasInvoiceTrait;
 
 trait CreateInvoiceRequestTrait
 {
+    use HasInvoiceTrait;
 
-    public function getInvoice(): Invoice
+    protected function createResponseData($data)
     {
-        return $this->getParameter('invoice');
+        $data = parent::createResponseData($data);
+        $data['invoice'] = $this->createResponseInvoice($data);
+        return $data;
     }
 
-    public function setInvoice(Invoice $invoice): void
+    protected function createResponseInvoice($data)
     {
-        $this->setParameter('invoice', $invoice);
+        return $this->getInvoice();
     }
 }

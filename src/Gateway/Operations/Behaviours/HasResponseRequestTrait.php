@@ -33,7 +33,13 @@ trait HasResponseRequestTrait
     protected function createResponse($data)
     {
         $response = $this->createResponseClass();
+        $data = $this->createResponseData($data);
         return $this->response = new $response($this, $data);
+    }
+
+    protected function createResponseData($data)
+    {
+        return $data;
     }
 
     protected function createResponseClass(): string
