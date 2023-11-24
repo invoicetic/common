@@ -10,7 +10,7 @@ abstract class AbstractResponse
      *
      * @var AbstractRequest
      */
-    protected $request;
+    protected AbstractRequest $request;
 
     /**
      * The data contained in the response.
@@ -50,5 +50,35 @@ abstract class AbstractResponse
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Is the response successful?
+     *
+     * @return boolean
+     */
+    public function isSuccessful(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Get the response code.
+     *
+     * @return string|null
+     */
+    public function getCode(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Get the response message.
+     *
+     * @return string|null
+     */
+    public function getMessage(): ?string
+    {
+        return null;
     }
 }
