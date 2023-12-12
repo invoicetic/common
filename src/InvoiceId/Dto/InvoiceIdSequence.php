@@ -2,11 +2,13 @@
 
 namespace Invoicetic\Common\InvoiceId\Dto;
 
+use Invoicetic\Common\Dto\Base\Behaviours\HasAttributesTrait;
 use Invoicetic\Common\Serializer\Serializable;
 
 class InvoiceIdSequence
 {
     use Serializable;
+    use HasAttributesTrait;
 
     public const TAG_NUMBER = '{NUMBER}';
     public const TAG_YEAR = '{YEAR}';
@@ -14,6 +16,14 @@ class InvoiceIdSequence
     public const TAG_MONTH = '{MONTH}';
 
     public const TAG_DAY = '{DAY}';
+
+    public const TAG_SEQUENCE = '{SEQUENCE}';
+
+    public const TAG_SEPARATOR = '{SEPARATOR}';
+
+    public const PATTERN_SEPARATOR = '-';
+
+    protected ?string $id = null;
 
     protected $pattern = null;
 
@@ -45,9 +55,9 @@ class InvoiceIdSequence
         return $this->sequence;
     }
 
-    public function setNumber(int $number): self
+    public function setNumber(int|string $number): self
     {
-        $this->number = $number;
+        $this->number = is_int($number) ? $number : intval($number);
         return $this;
     }
 
@@ -65,6 +75,24 @@ class InvoiceIdSequence
     public function getNumberLength(): ?int
     {
         return $this->numberLength;
+    }
+
+    public function getId(): ?string
+    {
+        if (!isset($this->id)) {
+            $this->id = $this->generateId();
+        }
+        return $this->id;
+    }
+
+    protected function generateId(): string
+    {
+        $id = $this->getPattern();
+        return strtr($id, [
+            self::TAG_SEQUENCE => $this->getSequence(),
+            self::TAG_NUMBER => sprintf('%0'.$this->getNumberLength().'d', $this->getNumber()),
+            self::TAG_SEPARATOR => self::PATTERN_SEPARATOR,
+        ]);
     }
 }
 
