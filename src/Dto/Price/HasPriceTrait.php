@@ -5,13 +5,16 @@ namespace Invoicetic\Common\Dto\Price;
 trait HasPriceTrait
 {
 
-    protected Price $price;
+    protected ?Price $price = null;
 
     /**
      * @return Price|null
      */
     public function getPrice(): ?Price
     {
+        if ($this->price === null) {
+            $this->initPrice();
+        }
         return $this->price;
     }
 
@@ -23,5 +26,10 @@ trait HasPriceTrait
     {
         $this->price = $price;
         return $this;
+    }
+
+    protected function initPrice(): void
+    {
+        $this->price = new Price();
     }
 }
