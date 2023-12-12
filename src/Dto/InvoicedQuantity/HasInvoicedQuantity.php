@@ -7,9 +7,9 @@ use Invoicetic\Common\Dto\InvoiceLine\InvoiceLine;
 trait HasInvoicedQuantity
 {
     /**
-     * @var InvoicedQuantity
+     * @var InvoicedQuantity|null
      */
-    protected InvoicedQuantity $invoicedQuantity;
+    protected ?InvoicedQuantity $invoicedQuantity = null;
 
     /**
      * @return InvoicedQuantity
