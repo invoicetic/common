@@ -4,13 +4,16 @@ namespace Invoicetic\Common\Dto\Item;
 
 trait HasItemTrait
 {
-    protected $item;
+    protected ?Item $item = null;
 
     /**
      * @return Item
      */
     public function getItem(): Item
     {
+        if ($this->item === null) {
+            $this->initItem();
+        }
         return $this->item;
     }
 
@@ -24,5 +27,9 @@ trait HasItemTrait
         return $this;
     }
 
+    protected function initItem(): void
+    {
+        $this->item = new Item();
+    }
 }
 
