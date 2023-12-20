@@ -2,8 +2,12 @@
 
 namespace Invoicetic\Common\Dto\PostalAddress;
 
+use Invoicetic\Common\Serializer\Serializable;
+
 class PostalAddress
 {
+    use Serializable;
+
     protected $streetName;
     protected $additionalStreetName;
     protected $buildingNumber;

@@ -23,14 +23,14 @@ trait HasInvoicedQuantity
     }
 
     /**
-     * @param float|InvoicedQuantity|null $invoicedQuantity
+     * @param float|InvoicedQuantity|array|null $invoicedQuantity
      * @return HasInvoicedQuantity|InvoiceLine
      */
-    public function setInvoicedQuantity(float|InvoicedQuantity|null $invoicedQuantity): self
+    public function setInvoicedQuantity(float|InvoicedQuantity|null|array $invoicedQuantity): self
     {
         $invoicedQuantity = $invoicedQuantity instanceof InvoicedQuantity
             ? $invoicedQuantity
-            : new InvoicedQuantity($invoicedQuantity);
+            : InvoicedQuantity::from($invoicedQuantity);
         $this->invoicedQuantity = $invoicedQuantity;
         return $this;
     }

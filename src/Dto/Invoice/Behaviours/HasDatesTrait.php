@@ -26,10 +26,10 @@ trait HasDatesTrait
     }
 
     /**
-     * @param DateTime $issueDate
+     * @param ?DateTime $issueDate
      * @return self
      */
-    public function setIssueDate($issueDate)
+    public function setIssueDate(DateTime|null $issueDate)
     {
         $this->issueDate = $issueDate;
         return $this;
@@ -47,7 +47,7 @@ trait HasDatesTrait
      * @param DateTime $dueDate
      * @return self
      */
-    public function setDueDate(DateTime $dueDate): self
+    public function setDueDate(DateTime|null $dueDate): self
     {
         $this->dueDate = $dueDate;
         return $this;

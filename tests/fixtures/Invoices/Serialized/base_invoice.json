@@ -1,0 +1,59 @@
+{
+  "invoiceTypeCode": "380",
+  "issueDate": null,
+  "dueDate": null,
+  "invoiceLines": [
+    {
+      "lineExtensionAmount": null,
+      "id": "2",
+      "item": {
+        "description": null,
+        "name": "Comision \u00eenscrieri: \r\nSemimaraton Gerar ~ 2017 | Cros 10.8 km",
+        "sellersItemIdentification": null,
+        "buyersItemIdentification": null,
+        "classifiedTaxCategory": null
+      },
+      "price": {
+        "priceAmount": 1.9,
+        "baseQuantity": 240.0,
+        "unitCode": "C62"
+      },
+      "invoicedQuantity": {
+        "unitCode": "C62",
+        "quantity": "240"
+      },
+      "unitCode": "C62"
+    },
+    {
+      "lineExtensionAmount": null,
+      "id": "3",
+      "item": {
+        "description": null,
+        "name": "Comision \u00eenscrieri: \r\nSemimaraton Gerar ~ 2017 | Semimaraton",
+        "sellersItemIdentification": null,
+        "buyersItemIdentification": null,
+        "classifiedTaxCategory": null
+      },
+      "price": {
+        "priceAmount": 1.9,
+        "baseQuantity": 586.0,
+        "unitCode": "C62"
+      },
+      "invoicedQuantity": {
+        "unitCode": "C62",
+        "quantity": "586"
+      },
+      "unitCode": "C62"
+    }
+  ],
+  "id": "SPT-00135",
+  "idSequence": {
+    "pattern": "{SEQUENCE}{SEPARATOR}{NUMBER}",
+    "sequence": "SPT",
+    "number": 135,
+    "numberLength": 5,
+    "id": "SPT-00135",
+    "attributes": []
+  },
+  "documentCurrencyCode": "RON"
+}

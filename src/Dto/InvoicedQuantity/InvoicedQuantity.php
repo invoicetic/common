@@ -3,9 +3,12 @@
 namespace Invoicetic\Common\Dto\InvoicedQuantity;
 
 use Invoicetic\Common\Dto\Base\UnitCode;
+use Invoicetic\Common\Serializer\Serializable;
 
 class InvoicedQuantity
 {
+    use Serializable;
+
     protected string $unitCode;
     protected float $quantity;
 
@@ -13,6 +16,14 @@ class InvoicedQuantity
     {
         $this->setQuantity($quantity);
         $this->unitCode = $unitCode ?? UnitCode::UNIT;
+    }
+
+    public static function from(float|int|null|array $data = null): self
+    {
+        if (is_array($data)) {
+            return new self($data['quantity'] ?? null, $data['unitCode'] ?? null);
+        }
+        return new self($data);
     }
 
     public function getUnitCode(): string

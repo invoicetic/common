@@ -5,6 +5,7 @@ namespace Invoicetic\Common\Tests\Dto\Invoice;
 use Invoicetic\Common\Dto\Invoice\Invoice;
 use Invoicetic\Common\Dto\Item\Item;
 use PHPUnit\Framework\TestCase;
+use function PHPUnit\Framework\assertSame;
 
 class InvoiceTest extends TestCase
 {
@@ -36,6 +37,16 @@ class InvoiceTest extends TestCase
         $this->assertEquals('Test name', $item->getName());
         $this->assertEquals('Test description', $item->getDescription());
         $this->assertEquals(1, $line->getInvoicedQuantity()->getQuantity());
+    }
+
+    public function test_denormalize_normalize()
+    {
+        $dataJson = file_get_contents(TEST_FIXTURE_PATH . '/Invoices/Serialized/base_invoice.json');
+        $data = json_decode($dataJson, true);
+
+        $invoice = Invoice::denormalize($data);
+        self::assertEquals('SPT-00135', $invoice->getId());
+        self::assertEquals('SPT', $invoice->getIdSequence()->getSequence());
     }
 
 }
