@@ -47,6 +47,9 @@ class InvoiceTest extends TestCase
         $invoice = Invoice::denormalize($data);
         self::assertEquals('SPT-00135', $invoice->getId());
         self::assertEquals('SPT', $invoice->getIdSequence()->getSequence());
+
+        $customer = $invoice->getAccountingCustomerParty();
+        self::assertEquals('SC BUCU', $customer?->getName());
     }
 
 }

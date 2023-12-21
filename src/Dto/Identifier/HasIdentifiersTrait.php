@@ -2,10 +2,14 @@
 
 namespace Invoicetic\Common\Dto\Identifier;
 
-use OutOfBoundsException;
+use ArrayObject;
+use Invoicetic\Common\Dto\Party\Party;
 
 trait HasIdentifiersTrait
 {
+    /**
+     * @var array<string, Identifier> Array of additional identifiers
+     */
     protected array $identifiers = [];
 
     /**
@@ -17,15 +21,10 @@ trait HasIdentifiersTrait
         return $this->identifiers;
     }
 
-    public function getIdentifier(string $key): ?Identifier
-    {
-        return $this->identifiers[$key] ?? null;
-    }
-
-    public function getIdentifierBySchema(string $schemeId): ?Identifier
+    public function getIdentifier(string $scheme): ?Identifier
     {
         foreach ($this->identifiers as $identifier) {
-            if ($identifier->getSchemeId() === $schemeId) {
+            if ($identifier->getScheme() === $scheme) {
                 return $identifier;
             }
         }
@@ -37,26 +36,43 @@ trait HasIdentifiersTrait
      * @param Identifier $identifier Identifier instance
      * @return self This instance
      */
-    public function addIdentifier(Identifier $identifier, $key = null): self
+    public function addIdentifier(Identifier $identifier): self
     {
-        $key = $key ?? $identifier->getScheme();
-        $this->identifiers[$key] = $identifier;
+        $key = null;
+        foreach ($this->identifiers as $k => $id) {
+            if ($id->getScheme() === $identifier->getScheme()) {
+                $key = $k;
+                break;
+            }
+        }
+        if ($key !== null) {
+            $this->identifiers[$key] = $identifier;
+        } else {
+            $this->identifiers[] = $identifier;
+        }
+        $this->reindexIdentifiers();
         return $this;
     }
 
+    public function setIdentifiers($identifiers): self
+    {
+        foreach ($identifiers as $identifier) {
+            $this->addIdentifier(
+                Identifier::from($identifier)
+            );
+        }
+        return $this;
+    }
 
     /**
      * Remove additional identifier
-     * @param int $index Identifier index
-     * @return self        This instance
-     * @throws OutOfBoundsException if identifier index is out of bounds
+     * @param int|string|Identifier $identifier
+     * @return Party|HasIdentifiersTrait This instance
      */
-    public function removeIdentifier(int $index): self
+    public function removeIdentifier(int|string|Identifier $identifier): self
     {
-        if ($index < 0 || $index >= count($this->identifiers)) {
-            throw new OutOfBoundsException('Could not find identifier by index');
-        }
-        array_splice($this->identifiers, $index, 1);
+        $scheme = $identifier instanceof Identifier ? $identifier->getScheme() : $identifier;
+        unset($this->identifiers[$scheme]);
         return $this;
     }
 
@@ -69,5 +85,10 @@ trait HasIdentifiersTrait
     {
         $this->identifiers = [];
         return $this;
+    }
+
+    protected function reindexIdentifiers()
+    {
+        $this->identifiers = array_values($this->identifiers);
     }
 }

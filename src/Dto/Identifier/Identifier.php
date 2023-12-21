@@ -2,10 +2,14 @@
 
 namespace Invoicetic\Common\Dto\Identifier;
 
+use Invoicetic\Common\Serializer\Serializable;
+
 class Identifier
 {
-    protected $value;
-    protected $scheme;
+    use Serializable;
+
+    protected string $value;
+    protected ?string $scheme = null;
 
 
     /**
@@ -19,6 +23,19 @@ class Identifier
         $this->setScheme($scheme);
     }
 
+    public static function from($value): self
+    {
+        if ($value instanceof Identifier) {
+            return $value;
+        }
+        if (is_string($value)) {
+            return new self($value);
+        }
+        if (is_array($value)) {
+            return new self($value['value'], $value['scheme'] ?? null);
+        }
+        throw new \InvalidArgumentException('Invalid identifier');
+    }
 
     /**
      * Get value

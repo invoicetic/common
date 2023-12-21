@@ -16,8 +16,12 @@ trait HasIdentifiersTrait
         return $this;
     }
 
-    public function setPartyIdentification(Identifier|string $identifier): self
+    public function setPartyIdentification(Identifier|string|int $identifier): self
     {
+        if ($identifier instanceof Identifier) {
+            $this->addIdentifier($identifier);
+            return $this;
+        }
         if (is_string($identifier)) {
             $identifier = new Identifier($identifier);
         }

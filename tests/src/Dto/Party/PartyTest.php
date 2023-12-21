@@ -20,5 +20,10 @@ class PartyTest extends TestCase
         $identifier = $party->getPartyIdentification();
         $this->assertInstanceOf(Identifier::class, $identifier);
         $this->assertEquals('123456789', $identifier->getValue());
+
+        $partySerialized = $party->serialize();
+        $partySerialized = json_decode($partySerialized, true);
+        $partyDenormalized = Party::denormalize($partySerialized);
+        $this->assertEquals($party, $partyDenormalized);
     }
 }

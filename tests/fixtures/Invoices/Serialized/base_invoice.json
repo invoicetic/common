@@ -55,5 +55,34 @@
     "id": "SPT-00135",
     "attributes": []
   },
+  "accountingCustomerParty": {
+    "postalAddress": {
+      "buildingNumber": null,
+      "streetName": "Str. Radu Negru 5\/C\/50",
+      "additionalStreetName": "asdasd",
+      "cityName": "bacau",
+      "postalZone": "60061",
+      "countrySubentity": "Romania",
+      "country": {
+        "identificationCode": "RO"
+      }
+    },
+    "name": "SC BUCU",
+    "legalEntity": {
+      "registrationName": "SC BUCU",
+      "companyId": "24276683",
+      "companyLegalForm": "SC BUCU"
+    },
+    "partyIdentification": {
+      "value": "24276683",
+      "scheme": "PartyIdentification"
+    },
+    "identifiers": [
+      {
+        "value": "24276683",
+        "scheme": "PartyIdentification"
+      }
+    ]
+  },
   "documentCurrencyCode": "RON"
 }

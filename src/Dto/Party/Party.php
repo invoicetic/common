@@ -24,10 +24,11 @@ class Party
         return $this->postalAddress;
     }
 
-    public function setPostalAddress(PostalAddress $postalAddress): self
+    public function setPostalAddress(?PostalAddress $postalAddress): self
     {
         $this->postalAddress = $postalAddress;
         return $this;
     }
+
 }
 
