@@ -2,11 +2,11 @@
 
 namespace Invoicetic\Common\Gateway\Operations;
 
-use Invoicetic\Common\Gateway\Operations\Behaviours\HasInvoiceTrait;
+use Invoicetic\Common\Gateway\Operations\Behaviours\HasInvoiceRequestTrait;
 
 trait CreateInvoiceRequestTrait
 {
-    use HasInvoiceTrait;
+    use HasInvoiceRequestTrait;
 
     protected function createResponseData($data)
     {

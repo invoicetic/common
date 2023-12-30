@@ -26,7 +26,7 @@ abstract class AbstractRequest
      * @param ClientInterface $httpClient  A HTTP client to make API calls with
      * @param HttpRequest     $httpRequest A Symfony HTTP request object
      */
-    public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
+    public function __construct(?ClientInterface $httpClient, ?HttpRequest $httpRequest)
     {
         $this->initHttpClient($httpClient);
         $this->initHttpRequest($httpRequest);

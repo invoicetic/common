@@ -2,7 +2,7 @@
 
 namespace Invoicetic\Common\Gateway\Operations\Behaviours;
 
-trait HasInvoiceTrait
+trait HasInvoiceRequestTrait
 {
     /**
      * @return mixed
