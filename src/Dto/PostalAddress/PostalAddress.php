@@ -8,13 +8,13 @@ class PostalAddress
 {
     use Serializable;
 
-    protected $streetName;
-    protected $additionalStreetName;
-    protected $buildingNumber;
-    protected $cityName;
-    protected $postalZone;
+    protected ?string $streetName;
+    protected ?string $additionalStreetName;
+    protected ?string $buildingNumber;
+    protected ?string $cityName;
+    protected ?string $postalZone;
 
-    protected $countrySubentity;
+    protected ?string $countrySubentity;
     protected $country;
 
 
@@ -109,10 +109,10 @@ class PostalAddress
     }
 
     /**
-     * @param string $subentity
+     * @param string|null $countrySubentity
      * @return self
      */
-    public function setCountrySubentity(string $countrySubentity): self
+    public function setCountrySubentity(?string $countrySubentity): self
     {
         $this->countrySubentity = $countrySubentity;
         return $this;

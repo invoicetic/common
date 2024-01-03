@@ -14,6 +14,23 @@ class PartyTest extends TestCase
         $data = [
             'name' => 'John Doe',
             'partyIdentification' => '123456789',
+            'legalEntity' => [
+                'companyID' => '123456789',
+                'registrationName' => 'John Doe',
+            ],
+            'postalAddress' => [
+                'streetName' => 'Test street',
+                'buildingNumber' => '1',
+                'cityName' => 'Test city',
+                'postalZone' => '123456',
+                'country' => [
+                    'identificationCode' => 'RO',
+                ],
+            ],
+            'contact' => [
+                'telephone' => '123456789',
+                'electronicMail' => 'test@domain.com',
+            ],
         ];
         $party = Party::denormalize($data);
 
