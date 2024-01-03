@@ -50,6 +50,9 @@ class InvoiceTest extends TestCase
 
         $customer = $invoice->getAccountingCustomerParty();
         self::assertEquals('SC BUCU', $customer?->getName());
+
+        $orderReference = $invoice->getOrderReference();
+        self::assertEquals('SPT-00135', $orderReference?->getId());
     }
 
 }

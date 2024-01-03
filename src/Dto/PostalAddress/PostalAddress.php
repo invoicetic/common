@@ -8,13 +8,13 @@ class PostalAddress
 {
     use Serializable;
 
-    protected ?string $streetName;
-    protected ?string $additionalStreetName;
-    protected ?string $buildingNumber;
-    protected ?string $cityName;
-    protected ?string $postalZone;
+    protected ?string $streetName = null;
+    protected ?string $additionalStreetName = null;
+    protected ?string $buildingNumber = null;
+    protected ?string $cityName = null;
+    protected ?string $postalZone = null;
 
-    protected ?string $countrySubentity;
+    protected ?string $countrySubentity = null;
     protected $country;
 
 

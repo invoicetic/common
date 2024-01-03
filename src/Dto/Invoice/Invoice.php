@@ -3,6 +3,7 @@
 namespace Invoicetic\Common\Dto\Invoice;
 
 use Invoicetic\Common\Dto\InvoiceLine\HasInvoiceLinesTrait;
+use Invoicetic\Common\Dto\References\OrderReference\HasOrderReferenceTrait;
 use Invoicetic\Common\InvoiceId\Behaviours\HasIdSequenceTrait;
 use Invoicetic\Common\InvoiceId\Behaviours\HasIDTrait;
 use Invoicetic\Common\Serializer\Serializable;
@@ -13,6 +14,7 @@ class Invoice
     use HasInvoiceLinesTrait;
     use HasIDTrait;
     use HasIdSequenceTrait;
+    use HasOrderReferenceTrait;
     use Behaviours\HasPartiesTrait;
     use Behaviours\InvoiceValidationTrait;
     use Behaviours\HasCurrencyTrait;

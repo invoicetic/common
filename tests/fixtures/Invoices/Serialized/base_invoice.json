@@ -2,6 +2,10 @@
   "invoiceTypeCode": "380",
   "issueDate": null,
   "dueDate": null,
+  "orderReference": {
+    "id": "SPT-00135",
+    "salesOrderId": null
+  },
   "invoiceLines": [
     {
       "lineExtensionAmount": null,
