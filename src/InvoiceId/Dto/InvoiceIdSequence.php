@@ -44,7 +44,7 @@ class InvoiceIdSequence
         return $this->pattern;
     }
 
-    public function setSequence(string $sequence): self
+    public function setSequence(?string $sequence): self
     {
         $this->sequence = $sequence;
         return $this;
@@ -55,8 +55,12 @@ class InvoiceIdSequence
         return $this->sequence;
     }
 
-    public function setNumber(int|string $number): self
+    public function setNumber(int|string|null $number): self
     {
+        if (is_null($number)) {
+            $this->number = null;
+            return $this;
+        }
         $this->number = is_int($number) ? $number : intval($number);
         return $this;
     }
