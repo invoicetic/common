@@ -2,9 +2,21 @@
 
 namespace Invoicetic\Common\Dto\Base;
 
+/**
+ * @see https://www.truugo.com/ubl/2.1/cl_unitofmeasure/
+ */
 class UnitCode
 {
+    /**
+     * one. Synonym: unit
+     */
     const UNIT = 'C62';
+
+    /**
+     * each. A unit of count defining the number of items regarded as separate units.
+     */
+    const EACH = 'EA';
+
     const PIECE = 'H87';
     const GROUP = 10;
     const ARE = 'ARE';

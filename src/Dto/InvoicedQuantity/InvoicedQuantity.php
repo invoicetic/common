@@ -9,7 +9,7 @@ class InvoicedQuantity
 {
     use Serializable;
 
-    protected string $unitCode;
+    protected string $unitCode = UnitCode::UNIT;
     protected float $quantity;
 
     public function __construct(float|int|null $quantity = null, ?string $unitCode = null)
