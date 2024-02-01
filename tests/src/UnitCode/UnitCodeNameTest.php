@@ -28,6 +28,9 @@ class UnitCodeNameTest extends TestCase
             [UnitCode::UNIT, 'ro', 'unitate'],
             [UnitCode::PIECE, 'en', 'piece'],
             [UnitCode::PIECE, 'ro', 'buc'],
+            ['test', 'en', 'test'],
+            ['test', 'ro', 'test'],
+            ['test', null, 'test'],
         ];
     }
 }
