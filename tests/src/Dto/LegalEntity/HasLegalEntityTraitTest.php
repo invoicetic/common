@@ -25,4 +25,15 @@ class HasLegalEntityTraitTest extends TestCase
         $this->assertEquals('Test name', $item->getRegistrationName());
         $this->assertEquals('123456', $item->getCompanyId());
     }
+
+    public function test_denormalize_with_null()
+    {
+        $data = [
+            'legalEntity' => null,
+        ];
+
+        $party = Party::denormalize($data);
+        self::assertFalse($party->hasLegalEntity());
+        self::assertNull($party->getLegalEntity());
+    }
 }

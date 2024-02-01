@@ -25,7 +25,7 @@ class UnitCodeNameTest extends TestCase
         return [
             [UnitCode::UNIT, 'en', 'unit'],
             [UnitCode::UNIT, null, 'unit'],
-            [UnitCode::UNIT, 'ro', 'unitate'],
+            [UnitCode::UNIT, 'ro', 'unit'],
             [UnitCode::PIECE, 'en', 'piece'],
             [UnitCode::PIECE, 'ro', 'buc'],
             ['test', 'en', 'test'],

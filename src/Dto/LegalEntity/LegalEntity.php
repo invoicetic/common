@@ -6,7 +6,6 @@ use Invoicetic\Common\Serializer\Serializable;
 
 class LegalEntity
 {
-
     use Serializable;
     
     protected $registrationName;

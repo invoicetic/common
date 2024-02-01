@@ -15,11 +15,8 @@ trait HasLegalEntityTrait
     /**
      * @return LegalEntity
      */
-    public function getLegalEntity(): LegalEntity
+    public function getLegalEntity(): ?LegalEntity
     {
-        if (null === $this->legalEntity) {
-            $this->legalEntity = new LegalEntity();
-        }
         return $this->legalEntity;
     }
 
@@ -29,10 +26,10 @@ trait HasLegalEntityTrait
     }
 
     /**
-     * @param LegalEntity $legalEntity
-     * @return self
+     * @param LegalEntity|null $legalEntity
+     * @return Party|HasLegalEntityTrait
      */
-    public function setLegalEntity(LegalEntity $legalEntity): self
+    public function setLegalEntity(?LegalEntity $legalEntity): self
     {
         $this->legalEntity = $legalEntity;
         return $this;
