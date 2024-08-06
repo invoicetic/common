@@ -5,6 +5,7 @@ namespace Invoicetic\Common\Tests\Dto\InvoiceLine;
 use Invoicetic\Common\Dto\InvoiceLine\InvoiceLine;
 use Invoicetic\Common\Dto\Item\Item;
 use PHPUnit\Framework\TestCase;
+use function PHPUnit\Framework\assertSame;
 
 class InvoiceLineTest extends TestCase
 {
@@ -38,6 +39,23 @@ class InvoiceLineTest extends TestCase
         $this->assertEquals('Test name', $item->getName());
         $this->assertEquals('Test description', $item->getDescription());
         $this->assertEquals(1, $line->getInvoicedQuantity()->getQuantity());
+    }
+
+    public function test_normalize_with_total()
+    {
+        self::assertFalse($this->line->hasTotalAmount());
+        $this->line->setTotalAmount(123.45);
+        $this->line->setNote('Test note');
+        self::assertSame(123.45, $this->line->getTotalAmount());
+        self::assertTrue($this->line->hasTotalAmount());
+
+        $lineNormalized = $this->line->serialize();
+        $lineNormalized = json_decode($lineNormalized, true);
+
+        $line = InvoiceLine::denormalize($lineNormalized);
+
+        self::assertTrue($line->hasTotalAmount());
+        self::assertSame(123.45, $line->getTotalAmount());
     }
 
     protected function setUp(): void

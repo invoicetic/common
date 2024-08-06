@@ -12,13 +12,19 @@ use Invoicetic\Common\Utility\Helper;
  */
 trait HasAttributesTrait
 {
-    protected $attributes = [];
+    protected array $attributes = [];
 
     public function fill(array $data): self
     {
         foreach ($data as $key => $value) {
             $this->setAttribute($key, $value);
         }
+        return $this;
+    }
+
+    public function setAttributes(array $attributes): self
+    {
+        $this->attributes = $attributes;
         return $this;
     }
 
